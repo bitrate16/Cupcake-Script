@@ -45,12 +45,12 @@ LongPrototype *long_prototype = NULL;
 
 // Long type
 Long::Long() {		
-	type  = LONG;
+	type  = LONGTYPE;
 	value = 0;
 };
 
 Long::Long(long i) {		
-	type  = LONG;
+	type  = LONGTYPE;
 	value = i;
 };
 
@@ -86,7 +86,7 @@ string Long::toString() {
 // Long prototype	
 LongPrototype::LongPrototype() {		
 	// table = new TreeObjectMap;
-	type  = LONG_PROTOTYPE;
+	type  = LONGTYPE_PROTOTYPE;
 };
 
 void LongPrototype::finalize(void) {
@@ -111,7 +111,7 @@ bool LongPrototype::contains(Scope *scope, string *name) {
 
 VirtualObject *LongPrototype::call(Scope *scope, int argc, VirtualObject **args) {
 	if (argc)
-		if (args[0]->type == LONG)
+		if (args[0]->type == LONGTYPE)
 			return new Long(((Long*) args[0])->value);
 		else
 			return new Long(objectIntValue(args[0]));
@@ -222,7 +222,7 @@ static VirtualObject* long_operator_div(Scope *scope, int argc, VirtualObject **
 static VirtualObject* long_operator_mod(Scope *scope, int argc, VirtualObject **args) {
 	if (argc != 2)
 		return new Undefined;
-	if (args[0]->type != LONG)
+	if (args[0]->type != LONGTYPE)
 		return new Undefined;
 	
 	Long       *a = (Long*) args[0];
@@ -349,7 +349,7 @@ static VirtualObject* long_operator_dec(Scope *scope, int argc, VirtualObject **
 // Functions
 // toString(long[, base])
 static VirtualObject* long_function_tostring(Scope *scope, int argc, VirtualObject **args) {
-	if (!argc || args[0]->type != LONG)
+	if (!argc || args[0]->type != LONGTYPE)
 		return NULL;
 	
 	int i = ((Long*) args[0])->value;

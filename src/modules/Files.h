@@ -63,8 +63,8 @@
 #define PRINTER_PROTOTYPE          58
 #define CHAR_TYPE                  59
 #define CHAR_TYPE_PROTOTYPE        60
-#define LONG                       61
-#define LONG_PROTOTYPE             62
+#define LONGTYPE                   61
+#define LONGTYPE_PROTOTYPE         62
 
 
 // - - - - - - - - - - - - - - - - - - - - - - - L O N G
