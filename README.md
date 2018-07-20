@@ -1,4 +1,5 @@
-## Cupcake Script interpreter
+Cupcake Script interpreter
+==========================
 
 ![](https://github.com/bitrate16/Cupcake-Script/blob/master/icon.png)
 
@@ -9,18 +10,20 @@
 - Support native C++ modules, customizable objects & functions.
 - Supports Streams, FIles & Math library.
 
-## Table of Contents
+Table of Contents
+=================
 
-* [Cupcake Script interpreter](#Cupcake-Script-interpreter)
-* [Installation](#Installation)
-* [Modules](#Modules)
-* [Object types](#Object-types)
-* [Syntax](#Syntax)
-* [Operators](#Operators)
-* [Additional review](#Additional-review)
-* [TODO](#TODO)
+* [Cupcake Script interpreter](#cupcake-script-interpreter)
+* [Installation](#installation)
+* [Modules](#modules)
+* [Object types](#object-types)
+* [Syntax](#syntax)
+* [Operators](#operators)
+* [Additional review](#additional-review)
+* [TODO](#todo)
 
-## Installation
+Installation
+============
 
 ```
 git clone https://github.com/bitrate16/Cupcake-Script
@@ -28,7 +31,9 @@ cd Cupcake-Script
 bash compile.sh install
 ```
 
-## Modules
+Modules
+=======
+
 Write your own module in C++ and put it into `src/modules`
 Compile with
 ```
@@ -39,7 +44,9 @@ And load it in cupcake source code
 NativeLoader.load('bin/MyModule.so');
 ```
 
-## Object types
+Object types
+============
+
 `Array`
 ```
 var arr = ['foo', 12, 'bar']
@@ -86,7 +93,8 @@ Widely used obejct type in any execution case
 var scope = this
 ```
 
-## Syntax
+Syntax
+======
 
 `for (<initialization>; <condition>; <increment>) <block>`
 
@@ -116,14 +124,18 @@ var scope = this
 `func = function() { return this }; var t = obj.func()`
 `t` is containing `function.__scope`
 
-## Operators
+Operators
+=========
 
 `==, !=, >, <, >=, <=, +, -,*, /, %, <<, >>,`
 `>>>, &, |, &&, ||, ^, !x, ~x, -x, +x, ++, --`
 
-## Additional review
+Additional review
+=================
 
 [check review](https://youtu.be/dQw4w9WgXcQ "check review")
 
-## TODO
+TODO
+====
+
 `XXX: Finish readme, add wiki`
