@@ -11,7 +11,14 @@
 
 ## Table of Contents
 
-[TOC]
+* [Cupcake Script interpreter](#Cupcake-Script-interpreter)
+* [Installation](#Installation)
+* [Modules](#Modules)
+* [Object types](#Object types)
+* [Syntax](#Syntax)
+* [Operators](#Operators)
+* [Additional review](#Additional-review)
+* [TODO](#TODO)
 
 ## Installation
 
