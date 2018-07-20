@@ -1,0 +1,32 @@
+
+
+// cd c:/Users/bitrate16/Documents/Projects/Interpreter_0
+// cls && g++ -march=x86-64 ck.cpp -o file.exe && file.exe -f res/in.ck
+
+// cd /mnt/c/Users/bitrate16/Documents/Projects/Interpreter_0
+// clear && g++ -march=x86-64 ck.cpp -o file && ./file -f res/in.ck
+// NO WARNINGS:
+// clear && g++ -w -march=x86-64 ck.cpp -o file && ./file -f res/in.ck
+// MEMORY TEST:
+// clear && valgrind  --leak-check=full ./file -f res/in.ck
+//
+// -static 
+// reset && g++ -w -g -march=x86-64 ck.cpp -o file && valgrind  --leak-check=full ./file
+//
+// reset && g++ -w -g -march=x86-64 ck.cpp -o file && valgrind --track-origins=yes --leak-check=full ./file > output.txt 2> erroutput.txt
+
+// Total line numbers: 
+// find . -name '*' | xargs wc -l
+
+// /usr/bin/time -v ./file
+
+// "C:\Program Files (x86)\Dr. Memory\bin\drmemory.exe" file.exe
+
+
+// bash buildso.sh src/modules/Math.cpp bin/Math.so && bash compile.sh debug
+// bash buildso.sh src/modules/Math.cpp bin/Math.so && bash buildso.sh src/modules/Files.cpp bin/Files.so && bash buildso.sh src/modules/StreamApi.cpp bin/StreamApi.so && bash compile.sh debug
+
+// bash buildso.sh src/modules/Files.cpp bin/Files.so && bash compile.sh debug
+// bash buildso.sh src/modules/Files.cpp bin/Files.so && bash buildso.sh src/modules/StreamApi.cpp bin/StreamApi.so && bash compile.sh debug
+
+// bash buildso.sh src/modules/StreamApi.cpp bin/StreamApi.so && bash compile.sh debug
