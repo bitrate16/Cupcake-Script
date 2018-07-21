@@ -139,5 +139,7 @@ TODO
 ====
 
 `XXX: Finish readme, add wiki`
+
 `XXX: popen implementation with streams`
+
 `XXX: allow passing arguments to the script file`
