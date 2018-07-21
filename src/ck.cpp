@@ -187,6 +187,7 @@ int main(int argc, char **argv) {
 		printf(":: -f <file path>: execute script from file.\n");
 		printf(":: -s <file path>: execute script from command line arguments.\n");
 		printf(":: -i <file path>: execute script from STDIN.\n");
+		printf(":: <file path>:    execute script from file.\n");
 	} else
 		if (argc >= 2) {
 			cbegin;
@@ -205,4 +206,4 @@ int main(int argc, char **argv) {
 			printf("No file specified.\n");
 	
 	return 0;
-}
+};
