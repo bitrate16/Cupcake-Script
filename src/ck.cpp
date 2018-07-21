@@ -154,7 +154,7 @@ int main(int argc, char **argv) {
 	}
 	
 	if (strcmp(argv[1], "-f"))
-		if (argc == 3) {
+		if (argc >= 3) {
 			cbegin;
 			
 			// Initialize InputStream
@@ -170,7 +170,7 @@ int main(int argc, char **argv) {
 		} else 
 			printf("No file specified.\n");
 	else if (strcmp(argv[1], "-s"))
-		if (argc == 3) {
+		if (argc >= 3) {
 			cbegin;
 			instream = new FAKESTREAM(argv[2]);
 			
@@ -188,7 +188,21 @@ int main(int argc, char **argv) {
 		printf(":: -s <file path>: execute script from command line arguments.\n");
 		printf(":: -i <file path>: execute script from STDIN.\n");
 	} else
-		printf("Unknown argument.\n");
+		if (argc >= 2) {
+			cbegin;
+			
+			// Initialize InputStream
+			FILE *fin = fopen(argv[1], "r");
+			if (!fin) {
+				printf("File %s not found.\n", argv[1]);
+				return 0;
+			}
+			
+			instream = new FAKESTREAM(fin);
+			
+			compactMain(argv[1]);
+		} else 
+			printf("No file specified.\n");
 	
 	return 0;
 }
