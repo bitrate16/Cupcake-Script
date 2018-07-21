@@ -256,15 +256,26 @@ void define_Context(Scope *scope) {
 static VirtualObject* function_stdio_readln(Scope *scope, int argc, VirtualObject **args) {
 	// printf("readln@call()\n");
 	
-	string s = "";
-	wint_t c;
+	string *s = new string();
+	wchar_t[1024] buf;
 	
-	while ((c = getwchar()) != WEOF && c != '\n')  
-		// printf("%08X : '%lc'\n", c, c);
-		s += (wchar_t) c;
+	while (fgetws(buf, 1024, stdin) != NULL) {
+		bool nline = 0;
+		
+		// Check if newline reached
+		for (int i = 0; i < 1024; ++i)
+			if (buf[i] == '\n') {
+				buf[i] = '\0';
+				nline = 1;
+				break;
+			}
+		
+		*s += buf;
+		if (nline)
+			break;
+	}
 	
-	
-	return new String(new string(s));
+	return new String(s);
 };
 
 // Read single character
@@ -272,7 +283,11 @@ static VirtualObject* function_stdio_read(Scope *scope, int argc, VirtualObject 
 	// printf("read@call()\n");
 	
 	string s;
-	s += (wchar_t) getwchar();
+	wint_t c = getwchar();
+	if (c == EOF)
+		return new Undefined;
+	s += (wchar_t) c;
+	
 	return new String(new string(s));
 };
 
@@ -281,7 +296,9 @@ static VirtualObject* function_stdio_readInt(Scope *scope, int argc, VirtualObje
 	// printf("readInt@call()\n");
 	
 	int i;
-	scanf("%d", &i);
+	int result = scanf("%d", &i);
+	if (result == -1)
+		return new Undefined();
 	
 	return new Integer(i);
 };
@@ -291,7 +308,9 @@ static VirtualObject* function_stdio_readDouble(Scope *scope, int argc, VirtualO
 	// printf("readDouble@call()\n");
 	
 	double d;
-	scanf("%lf", &d);
+	int result = scanf("%lf", &d);
+	if (result == -1)
+		return new Undefined();
 	
 	return new Double(d);
 };
