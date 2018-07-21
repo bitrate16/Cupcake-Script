@@ -6,7 +6,7 @@
 // ck -f res/IODemo.ck
 
 stdio.print('Type your name: ');
-var name = stdio.readLn();
+var name = stdio.readln();
 
 stdio.println('Hello, ' + name);
 
