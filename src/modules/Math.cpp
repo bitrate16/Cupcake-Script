@@ -350,7 +350,7 @@ static void define_math(Scope *scope) {
 	math->table->put(string("fmod"),  new NativeFunction(&f_fmod));
 	math->table->put(string("abs"),   new NativeFunction(&f_abs));
 	
-	math->table->put(string("PI",      new Double(MATH_PI));
+	math->table->put(string("PI"),     new Double(MATH_PI));
 	math->table->put(string("RAD2DEG", new Double(RAD2DEG));
 	math->table->put(string("DEG2RAD", new Double(DEG2RAD));
 };
