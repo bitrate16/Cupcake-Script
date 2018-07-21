@@ -257,22 +257,18 @@ static VirtualObject* function_stdio_readln(Scope *scope, int argc, VirtualObjec
 	// printf("readln@call()\n");
 	
 	string *s = new string();
-	wchar_t buf[1024];
+	wint_t c;
 	
-	while (fgetws(buf, 1024, stdin) != NULL) {
-		bool nline = 0;
+	while (true) {
+		c = fgetwc(stdin);
 		
-		// Check if newline reached
-		for (int i = 0; i < 1024; ++i)
-			if (buf[i] == '\n') {
-				buf[i] = '\0';
-				nline = 1;
-				break;
-			}
-		
-		*s += buf;
-		if (nline)
+		if (c == WEOF)
 			break;
+		
+		if (c == '\n')
+			break;
+		
+		*s += c;
 	}
 	
 	return new String(s);
@@ -291,16 +287,20 @@ static VirtualObject* function_stdio_read(Scope *scope, int argc, VirtualObject 
 	return new String(new string(s));
 };
 
+inline static bool c_digit(wint_t c) {
+	return '0' <= c && c <= '9';
+};
+
 // Read integer from input
 static VirtualObject* function_stdio_readInt(Scope *scope, int argc, VirtualObject **args) {
 	// printf("readInt@call()\n");
 	
 	int i;
-	int result = scanf("%d", &i);
-	if (result == -1)
-		return new Undefined();
+	int result = wscanf(L"%d",&i);
+	if (result)
+		return new Integer(i);
 	
-	return new Integer(i);
+	return new Undefined();
 };
 
 // Read double from input
@@ -308,11 +308,11 @@ static VirtualObject* function_stdio_readDouble(Scope *scope, int argc, VirtualO
 	// printf("readDouble@call()\n");
 	
 	double d;
-	int result = scanf("%lf", &d);
+	int result = wscanf(L"%lf", &d);
 	if (result == -1)
-		return new Undefined();
+		return new Double(d);
 	
-	return new Double(d);
+	return new Undefined();
 };
 
 static VirtualObject* function_stdio_println(Scope *scope, int argc, VirtualObject **args) {
