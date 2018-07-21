@@ -349,6 +349,24 @@ static VirtualObject* function_tostring(Scope *scope, int argc, VirtualObject **
 	return new String(s);
 };
 
+static VirtualObject* function_parseInt(Scope *scope, int argc, VirtualObject **args) {
+	if (!argc)
+		return NULL;
+	
+	int base = 10;
+	if (argc >= 2)
+		base = objectIntValue(args[1]);
+	
+	string s = objectStringValue(args[0]);
+	int a = s.toInt(-1, base);
+	int b = s.toInt(+1, base);
+	
+	if (a == b)
+		return new Integer(a);
+	
+	return new Undefined();
+};
+
 
 // Called on start. Defines integer prototype & type
 void define_integer(Scope *scope) {
@@ -383,6 +401,7 @@ void define_integer(Scope *scope) {
 	integer_prototype->table->put(string("__operator--"),  new NativeFunction(&operator_dec));
 	
 	integer_prototype->table->put(string("toString"),      new NativeFunction(&function_tostring));
+	integer_prototype->table->put(string("parseInt"),      new NativeFunction(&function_parseInt));
 	integer_prototype->table->put(string("SIZE"),          new Integer(sizeof(int)));
 };
 
