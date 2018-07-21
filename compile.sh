@@ -2,6 +2,8 @@
 
 reset
 
+mkdir bin
+
 cd bin
 
 if [ "$1" == "debug" ]; then
