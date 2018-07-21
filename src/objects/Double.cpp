@@ -302,6 +302,21 @@ static VirtualObject* function_tostring(Scope *scope, int argc, VirtualObject **
 	return new String(objectStringValue(args[0]));
 };
 
+static VirtualObject* function_parseDouble(Scope *scope, int argc, VirtualObject **args) {
+	if (!argc)
+		return NULL;
+	
+	string s = objectStringValue(args[0]);
+	double a = s.toDouble(-1);
+	double b = s.toDouble(+1);
+	
+	if (a == b)
+		return new Double(a);
+	
+	return new Undefined();
+};
+
+
 
 // Called on start. Defines double prototype & type
 void define_double(Scope *scope) {
@@ -334,6 +349,7 @@ void define_double(Scope *scope) {
 	double_prototype->table->put(string("__operator--"),  new NativeFunction(&operator_dec));
 	
 	double_prototype->table->put(string("toString"),      new NativeFunction(&function_tostring));
+	double_prototype->table->put(string("parseDouble"),   new NativeFunction(&function_parseDouble));
 	double_prototype->table->put(string("SIZE"),          new Integer(sizeof(double)));
 };
 
