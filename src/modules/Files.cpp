@@ -1974,7 +1974,7 @@ static VirtualObject* s_readInt(Scope *scope, int argc, VirtualObject **args) {
 	}
 	
 	int i;
-	int scan = fscanf(fis->cfile, "%d", &i);
+	int scan = fwscanf(fis->cfile, L"%d", &i);
 	if (scan == -1) 
 		return new Undefined();
 	return new Integer(i);
@@ -1997,7 +1997,7 @@ static VirtualObject* s_readDouble(Scope *scope, int argc, VirtualObject **args)
 	}
 	
 	double d;
-	int scan = fscanf(fis->cfile, "%lf", &d);
+	int scan = fwscanf(fis->cfile, L"%lf", &d);
 	if (scan == -1) 
 		return new Undefined();
 	return new Double(d);
