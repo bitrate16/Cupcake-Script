@@ -257,7 +257,7 @@ static VirtualObject* function_stdio_readln(Scope *scope, int argc, VirtualObjec
 	// printf("readln@call()\n");
 	
 	string *s = new string();
-	wchar_t[1024] buf;
+	wchar_t buf[1024];
 	
 	while (fgetws(buf, 1024, stdin) != NULL) {
 		bool nline = 0;
