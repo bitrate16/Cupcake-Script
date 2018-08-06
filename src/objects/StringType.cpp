@@ -104,15 +104,19 @@ void String::finalize(void) {
 };
 
 VirtualObject *String::get(Scope *scope, string *name) {
-	int i = parsePositiveInt();
+	if (!name)
+		return new Undefined();
 	
-	if (i > stringLength())
-		return new Undefined;
+	int index = name->toInt(10, -1);
+	if (index == -1 && *name != "-1")
+		return string_prototype->table->get(*name);
 	
-	if (i != -1)
-		return new String(this, i, 1);
+	if (index < 0 || index >= stringLength()) {
+		scope->context->executer->raiseError("String index out of bounds");
+		return NULL;
+	}
 	
-	return string_prototype->table->get(*name);
+	return new String(this, index, 1);
 };
 
 void String::put(Scope *scope, string *name, VirtualObject *value) {};
