@@ -74,7 +74,8 @@ void signal_callback_handler(int signum) {
 
 
 // 3 in 1. Only for 0.95$ now!
-void compactMain(const char *path) {		
+// Passing raw arguments with offset
+void compactMain(const char *path, int argc, char **argv) {		
 	tstream = new TokenStream;
 	parser  = new Parser;
 	
@@ -114,6 +115,12 @@ void compactMain(const char *path) {
 	
 	global_context->script_file_path = FileUrl::getRealPath(path == "/" ? "virtual" : path);
 	global_context->script_dir_path  = path == "/" ? path : global_context->script_file_path->getDirectory();
+	
+	// Append arguments
+	Array *arguments_array = new Array();
+	for (int i = 0; i < argc; ++i)
+		arguments_array->array->push(new String(new string(argv[i])));
+	global_context->scope->table->put(string("arguments"), arguments_array);
 	
 	// Create executer & run code
 	executer = new ASTExecuter;
@@ -174,14 +181,14 @@ int main(int argc, char **argv) {
 			cbegin;
 			instream = new FAKESTREAM(argv[2]);
 			
-			compactMain("/");
+			compactMain("/", argc - 3, argv + 3 * sizeof(char*));
 		} else 
 			printf("No source specified.\n");
 	else if (strcmp(argv[1], "-i")) {
 		cbegin;
 		instream = new FAKESTREAM();
 			
-		compactMain("/");
+		compactMain("/", argc, argv);
 	} else if (strcmp(argv[1], "-h")) {
 		printf("Help:\n");
 		printf(":: -f <file path>: execute script from file.\n");
@@ -201,7 +208,7 @@ int main(int argc, char **argv) {
 			
 			instream = new FAKESTREAM(fin);
 			
-			compactMain(argv[1]);
+			compactMain(argv[1], argc - 2, argv + 2 * sizeof(char*));
 		} else 
 			printf("No file specified.\n");
 	
