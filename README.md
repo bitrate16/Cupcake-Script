@@ -142,4 +142,29 @@ TODO
 
 `XXX: popen implementation with streams`
 
-`XXX: allow passing arguments to the script file`
+`XXX [DONE]: allow passing arguments to the script file`
+
+`XXX: delete <ref_expr> statement`
+
+`XXX: define Char type in String`
+
+`XXX: zero character`
+
+`XXX: string.__operator compare [>/>=/</<=/==/!=] with integer/char types`
+
+`XXX: string.__operator# convert string to char`
+
+`XXX: collection structure: (<exp>[, <exp>])`
+
+`XXX: return collection`
+
+`XXX: assign collection to multiple variables: var a, b, c = (13, 'kek', ['lol', 'pek', 'cheburek'])`
+
+`XXX: sockets implementation`
+
+`XXX: implement support for __operator# and others`
+
+`XXX: string: .setcharcode, .getcharcode, .setchar, .getchar, __operator+ char, __operator# -> array of characters`
+
+`XXX: bitwise looped shift: @> / <@`
+
