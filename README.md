@@ -168,3 +168,7 @@ TODO
 
 `XXX: bitwise looped shift: @> / <@`
 
+`XXX: list generators`
+
+`XXX: list iterator loop`
+
