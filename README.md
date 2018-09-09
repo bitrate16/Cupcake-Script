@@ -172,3 +172,5 @@ TODO
 
 `XXX: list iterator loop`
 
+`XXX: GIL like thread synchronizing system`
+
