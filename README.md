@@ -176,3 +176,5 @@ TODO
 
 `XXX: Combine Parser and Tokenizer`
 
+`XXX: Save object type extendtion hierarchy in object`
+
