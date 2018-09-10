@@ -176,5 +176,33 @@ TODO
 
 `XXX: Combine Parser and Tokenizer`
 
-`XXX: Save object type extendtion hierarchy in object`
+`XXX: Save object type extendtion hierarchy in object:`
+```
+struct TypeIdList {
+  int type;
+  TypeList parent;
+  
+  TypeIdList(TypeList parent, int type) {
+    this->type = type;
+    this->parent = parent;
+  }
+  
+  TypeIdList(int type) {
+    this->type = type;
+    this->parent = NULL;
+  }
+};
 
+struct VirtualObject {
+  static const int type = VIRTUAL_OBJECT;
+  statis const TypeIdList parentType = NULL;
+  
+  // ...
+};
+
+struct Scope : VirtualObject {
+  static const int type = SCOPE;
+  static const TypeIdList parentType = TypeIdList(VirtualObject::parentType, Scope::type);
+  
+  // ...
+};
