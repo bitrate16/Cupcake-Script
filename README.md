@@ -174,3 +174,5 @@ TODO
 
 `XXX: GIL like thread synchronizing system`
 
+`XXX: Combine Parser and Tokenizer`
+
