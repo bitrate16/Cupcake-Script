@@ -206,3 +206,6 @@ struct Scope : VirtualObject {
   
   // ...
 };
+```
+
+`XXX: Memory allocation control`
