@@ -21,6 +21,7 @@ Table of Contents
 * [Operators](#operators)
 * [Additional review](#additional-review)
 * [TODO](#todo)
+* [TOTypes list](#types-list)
 
 Installation
 ============
@@ -129,6 +130,34 @@ Operators
 
 `==, !=, >, <, >=, <=, +, -,*, /, %, <<, >>,`
 `>>>, &, |, &&, ||, ^, !x, ~x, -x, +x, ++, --`
+
+Types list
+==========
+
+* General
+** Integer
+** Double
+** Boolean
+** Object
+** Array
+** String
+** CodeFunction
+** NativeFunction
+** Scope
+** ProxyScope
+** Null
+** Undefined
+** Error
+* Additional
+** InputStream
+** OutputStream
+** FileInputStream
+** FileOutputStream
+** File
+** Char
+** Byte
+** Scanner
+** Printer
 
 Additional review
 =================
