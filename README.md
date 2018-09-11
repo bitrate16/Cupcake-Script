@@ -209,3 +209,7 @@ struct Scope : VirtualObject {
 ```
 
 `XXX: Memory allocation control`
+
+`XXX: BigInteger, BigDouble`
+
+`XXX: TreeObjectMap extends abstract ObjectMap`
