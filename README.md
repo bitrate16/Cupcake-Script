@@ -148,6 +148,8 @@ Types list
 	* Null
 	* Undefined
 	* Error
+	* NativeLoader
+	* VirtualObject
 * Additional
 	* InputStream
 	* OutputStream
