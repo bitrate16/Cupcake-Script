@@ -4,7 +4,7 @@ Cupcake Script interpreter
 ![](https://github.com/bitrate16/Cupcake-Script/blob/master/icon.png)
 
 - Custom scripting language written in C++.
-- Fully supported on linux, unicode only on Waindows.
+- Fully supported on linux, unicode only on Windows.
 - Supports operators overloading.
 - Object-oriented language.
 - Support native C++ modules, customizable objects & functions.
