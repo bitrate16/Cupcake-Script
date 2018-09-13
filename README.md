@@ -160,6 +160,7 @@ Types list
 	* Byte
 	* Scanner
 	* Printer
+	* BytePtr
 
 Additional review
 =================
