@@ -245,3 +245,5 @@ struct Scope : VirtualObject {
 `XXX: BigInteger, BigDouble`
 
 `XXX: TreeObjectMap extends abstract ObjectMap`
+
+`XXX: GarbageCollector object allocation control`
