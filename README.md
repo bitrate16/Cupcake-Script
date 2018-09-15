@@ -253,3 +253,5 @@ struct Scope : VirtualObject {
 `XXX: CodeFunction::apply`
 
 `XXX: Simplify error rising`
+
+`XXX: import instead of NativeLoader and System.import`
