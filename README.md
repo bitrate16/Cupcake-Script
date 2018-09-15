@@ -251,3 +251,5 @@ struct Scope : VirtualObject {
 `XXX: CodeFunction, NativeFunction extends Function`
 
 `XXX: CodeFunction::apply`
+
+`XXX: Simplify error rising`
