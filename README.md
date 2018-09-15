@@ -247,3 +247,7 @@ struct Scope : VirtualObject {
 `XXX: TreeObjectMap extends abstract ObjectMap`
 
 `XXX: GarbageCollector object allocation control`
+
+`XXX: CodeFunction, NativeFunction extends Function`
+
+`XXX: CodeFunction::apply`
