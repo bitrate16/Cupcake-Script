@@ -174,7 +174,7 @@ TODO
 
 `XXX: popen implementation with streams`
 
-`XXX [DONE]: allow passing arguments to the script file`
+`XXX [+]: allow passing arguments to the script file`
 
 `XXX: delete <ref_expr> statement`
 
@@ -208,7 +208,7 @@ TODO
 
 `XXX: Combine Parser and Tokenizer`
 
-`XXX: Save object type extendtion hierarchy in object:`
+`XXX [+]: Save object type extendtion hierarchy in object:`
 ```
 struct TypeIdList {
   int type;
