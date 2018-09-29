@@ -68,6 +68,7 @@
 
 #define DATA10_OFFSET  16
 #define FLAGS_OFFSET   26
+#define USER16_OFFSET   0
 
 #define AST_EXECUTION_STACK_SIZE 16384
 #define AST_OBJECT_STACK_SIZE    16384
@@ -157,9 +158,9 @@ struct ASTObjectElement {
 // while perfoming GC.gc_collect
 struct ASTObjectStack : GC_Object {
 	
-	int   max_size;
-	int       size;
-	int alloc_size;
+	int   max_size; // <-- max allowed
+	int       size; // <-- current
+	int alloc_size; // <-- allocated
 	
 	// Points to end of stack
 	ASTObjectElement    *top;
