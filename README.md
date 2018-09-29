@@ -255,3 +255,28 @@ struct Scope : VirtualObject {
 `XXX: Simplify error rising`
 
 `XXX: import instead of NativeLoader and System.import`
+
+`XXX: typles, typle arguments, tuple assignment, tuple packing/unpacking`
+
+`XXX: ck console`
+
+`XXX: default argument values for funtions, selectable arguments assignment`
+
+`XXX: function call cope points to function`
+
+`XXX: generators with yield/list generators`
+
+`XXX: fucntion call with object:`
+```
+f(12, "foo") { bar: ['tar', 'sar'], par: -1 }
+```
+
+`XXX: Runtime.__exitHandler`
+
+`XXX: VirtualObject.__callable`
+
+`XXX: eval`
+
+`XXX: Token namespace encapsulation`
+
+`XXX: using(x) ~ with(x) - unpack object to scope`
