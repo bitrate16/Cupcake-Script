@@ -2078,7 +2078,7 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 				if (element->data & FLAG_5) {
 					element->data &= ~FLAG_0;
 					element->data &= ~FLAG_3;
-					element->data &= ~FLAG_5;
+					// element->data &= ~FLAG_5; -> causes memory leak of unrooting scopes
 					// Push value up
 					astobjstack->pullUp(depth);
 					
