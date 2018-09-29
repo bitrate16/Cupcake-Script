@@ -266,7 +266,7 @@ struct Scope : VirtualObject {
 
 `XXX: generators with yield/list generators`
 
-`XXX: fucntion call with object:`
+`XXX: function call with object:`
 ```
 f(12, "foo") { bar: ['tar', 'sar'], par: -1 }
 ```
