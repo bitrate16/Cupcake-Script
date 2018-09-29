@@ -55,6 +55,10 @@ static VirtualObject* function_GC_numobjects(Scope *scope, int argc, VirtualObje
 	return new Integer(GC.gc_size);
 };
 
+static VirtualObject* function_GC_numroots(Scope *scope, int argc, VirtualObject **args) {	
+	return new Integer(GC.gc_roots_size);
+};
+
 static VirtualObject* function_GC_collect(Scope *scope, int argc, VirtualObject **args) {	
 	GC.gc_collect();
 	return NULL;
@@ -63,6 +67,7 @@ static VirtualObject* function_GC_collect(Scope *scope, int argc, VirtualObject 
 static void define_GC(Scope *scope) {
 	Object *GC_Obj = new Object;
 	GC_Obj->table->put(string("numObjects"), new NativeFunction(&function_GC_numobjects));
+	GC_Obj->table->put(string("numRoots"),   new NativeFunction(&function_GC_numroots));
 	GC_Obj->table->put(string("collect"),    new NativeFunction(&function_GC_collect));
 	
 	scope->table->put(string("GC"), GC_Obj);
