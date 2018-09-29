@@ -67,10 +67,11 @@ void GC_Object::finalize() {};
 
 // GarbageCollector
 GarbageCollector::GarbageCollector() {
-	gc_size    = 0;
-	gc_roots   = NULL;
-	gc_locks   = NULL;
-	gc_objects = NULL;
+	gc_size       = 0;
+	gc_roots_size = 0;
+	gc_roots      = NULL;
+	gc_locks      = NULL;
+	gc_objects    = NULL;
 	gc_collecting = 0;
 };
 
@@ -176,6 +177,7 @@ GC_Object *GarbageCollector::gc_attach_root(GC_Object *o) {
 	printf("GC_attach_root (0x%08x)\n",  ((int) o));
 #endif
 	
+	++gc_roots_size;
 	o->gc_root       = 1;
 	o->gc_reachable  = 0;
 	o->gc_root_chain = chain;
@@ -197,6 +199,7 @@ void GarbageCollector::gc_deattach_root(GC_Object *o) {
 	printf("GC_deattach_root (0x%08x)\n",  ((int) o));
 #endif
 	
+	--gc_roots_size;
 	o->gc_root = 0;
 	return;
 };
