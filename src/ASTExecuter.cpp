@@ -74,7 +74,7 @@ void ASTExecuterElement::printData(void) {
 	printf("FLAG_5: %d\n", (data & FLAG_5) >> (FLAGS_OFFSET + 0));
 	printf("DATA12: %d\n", (data & DATA10_MASK) >> DATA10_OFFSET);
 	printf("USER16: %d\n",  data & USER16_MASK);
-	printf("TARGET: %d\n",  target ? 1 : 0);
+	printf("TARGET: %d\n",  target ? target->type : 0);
 };
 
 
@@ -2080,7 +2080,10 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 					element->data &= ~FLAG_3;
 					// element->data &= ~FLAG_5; -> causes memory leak of unrooting scopes
 					// Push value up
-					astobjstack->pullUp(depth);
+					if (((element->data & USER16_MASK) >> USER16_OFFSET) == (astobjstack->size & 1))
+						astobjstack->push(new Undefined, depth - 1);
+					else
+						astobjstack->pullUp(depth);
 					
 					element->target = NULL;
 					
@@ -2131,9 +2134,13 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 				//  --------------
 				// |  undefined
 				//  --------------
-				// |  undefined      <-- addictional arguments [expected_argc]
-				//  --------------
+				// |  undefined      <-- additional arguments [expected_argc]
+				//  --------------   <-- user16 = astobjstack->size % 2
+				//						 used for checking for return value
+				//                       if no value returned, user16 == (astobjstack->size after execution) % 2
 				
+				element->data |= (astobjstack->size & 1) << USER16_OFFSET;
+					
 				while (e->next && e->next->level == depth) {
 					++n;
 					e = e->next;
@@ -2462,7 +2469,10 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 				element->data &= ~FLAG_0;
 				// element->data &= ~FLAG_2; -> causes memoty leak of unrooted scopes
 				// Push value up
-				astobjstack->pullUp(depth);
+				if (((element->data & USER16_MASK) >> USER16_OFFSET) == (astobjstack->size & 1))
+					astobjstack->push(new Undefined, depth - 1);
+				else
+					astobjstack->pullUp(depth);
 				
 				element->target = NULL;
 			} else if (element->target == NULL)
@@ -2479,7 +2489,7 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 					// Reset FLAG_0
 					aststack->head->data &= ~FLAG_0;
 					element->data        |= FLAG_1;
-					
+					element->data        |= (astobjstack->size & 1) << USER16_OFFSET;
 					
 					// astobjstack->print();
 					
@@ -2496,7 +2506,9 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 					// |    ....
 					//  --------------
 					// |    argN         <-- available arguments in stack [n]
-					//  --------------
+					//  --------------   <-- user16 = astobjstack->size % 2
+					//						 used for checking for return value
+					//                       if no value returned, user16 == (astobjstack->size after execution) % 2
 					
 					int n = 0;
 					ASTObjectElement *e = astobjstack->head;
@@ -2551,7 +2563,7 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 								element->scope = new Scope(new ProxyScope(element->scope, r));
 							else {
 								if (!element->next) {
-									raiseError("Execution break. Scope == NULL.");
+									raiseError("Execution error. Scope == NULL.");
 									element->data  &= FLAG6_MASK;
 									element->target = NULL;
 								}
@@ -3715,17 +3727,18 @@ void ASTExecuter::begin(Context *context, ASTNode *root) {
 	aststack->head->attached_node = root;
 	aststack->head->scope         = context->scope;
 	context->executer             = this;
-	ASTNode *node                 = root;
+	//ASTNode *node                 = root;
 	
-	while (!_error && (node != NULL || (aststack->head && (aststack->head->data & FLAG_0)))) {
+	while (!_error && aststack->head) { // && (node != NULL || (aststack->head && (aststack->head->data & DATA12_MASK)))) {
 		if (!_global_exec_state)
 			break;
 		
 		try {
 			visit(aststack->head, aststack->head ? aststack->head->attached_node : NULL, aststack->size);
 		} catch(...) {
-			raiseError("Unhandled Exception");
+			raiseError("Unhandled Execution Error");
 		}
+		
 		if (_error)
 			break;
 		
@@ -3738,9 +3751,9 @@ void ASTExecuter::begin(Context *context, ASTNode *root) {
 			
 			ASTExecuterElement *e = aststack->pop();
 			
-			node = e ? e->attached_node : NULL;
+			// node = e ? e->attached_node : NULL;
 		} else {
-			node = aststack->head->target;
+			ASTNode *node = aststack->head->target;
 			
 			if (!aststack->push()) {
 				stackoverflow_error(this, EXECUTION_STACK);
