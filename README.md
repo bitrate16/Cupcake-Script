@@ -180,7 +180,7 @@ TODO
 
 `XXX: define Char type in String`
 
-`XXX: zero character`
+`XXX [+]: zero character`
 
 `XXX: string.__operator compare [>/>=/</<=/==/!=] with integer/char types`
 
