@@ -2460,7 +2460,7 @@ void ASTExecuter::visit(ASTExecuterElement *element, ASTNode *node, int depth) {
 			
 			if (element->data & FLAG_2) {
 				element->data &= ~FLAG_0;
-				element->data &= ~FLAG_2;
+				// element->data &= ~FLAG_2; -> causes memoty leak of unrooted scopes
 				// Push value up
 				astobjstack->pullUp(depth);
 				
