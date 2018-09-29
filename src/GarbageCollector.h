@@ -65,6 +65,7 @@ struct GarbageCollector {
 	// Prevent recursive garbage collection.
 	int    gc_collecting;
 	int          gc_size;
+	int          gc_roots_size;
 	GC_Chain   *gc_roots;
 	GC_Chain   *gc_locks;
 	GC_Chain *gc_objects;
