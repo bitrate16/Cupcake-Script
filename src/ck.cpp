@@ -175,7 +175,7 @@ int main(int argc, char **argv) {
 			
 			instream = new FAKESTREAM(fin);
 			
-			compactMain(argv[2]);
+			compactMain(argv[2], argc - 3, argv + 3 * sizeof(char*));
 		} else 
 			printf("No file specified.\n");
 	else if (strcmp(argv[1], "-s"))
