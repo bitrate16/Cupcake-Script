@@ -116,11 +116,13 @@ void compactMain(const char *path, int argc, char **argv) {
 	global_context->script_file_path = FileUrl::getRealPath(path == "/" ? "virtual" : path);
 	global_context->script_dir_path  = path == "/" ? path : global_context->script_file_path->getDirectory();
 	
+	/* ERROR HERE
 	// Append arguments
 	Array *arguments_array = new Array();
 	for (int i = 0; i < argc; ++i)
 		arguments_array->array->push(new String(new string(argv[i])));
 	global_context->scope->table->put(string("arguments"), arguments_array);
+	*/
 	
 	// Create executer & run code
 	executer = new ASTExecuter;
