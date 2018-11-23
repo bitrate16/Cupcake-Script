@@ -11,7 +11,7 @@
 
 // For list of functions see reference http://www.cplusplus.com/reference/cmath
 
-stdio.println('Math load response: ' + NativeLoader.load('../bin/StreamApi.so'));
+stdio.println('Math load response: ' + NativeLoader.load('../bin/Math.so'));
 
 // Convert 45 degrees to radians
 var angleDeg = 45;
